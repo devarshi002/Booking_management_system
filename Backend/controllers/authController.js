@@ -41,6 +41,23 @@ const login = async (req, res) => {
     return res.status(400).json({ message: "Email and password required" });
   }
 
+  // 🔒 Hardcoded Admin Login for Devarshi Tambulkar
+  if (email === "devarshitambulakr2@gmail.com" && password === "Password@123") {
+    const adminUser = {
+      id: 0,
+      name: "Devarshi Tambulkar",
+      email,
+      role: "admin"
+    };
+
+    const token = jwt.sign(adminUser, process.env.JWT_SECRET || "default_dev_secret", {
+      expiresIn: "1d"
+    });
+
+    console.log("✅ Hardcoded admin login successful");
+    return res.json({ token, user: adminUser });
+  }
+
   try {
     const [users] = await pool.execute("SELECT * FROM users WHERE email = ?", [email]);
     if (users.length === 0) {
@@ -59,14 +76,13 @@ const login = async (req, res) => {
       return res.status(401).json({ message: "Invalid credentials" });
     }
 
-    const secret = process.env.JWT_SECRET || "default_dev_secret";
     const token = jwt.sign(
       { id: user.id, email: user.email, role: user.role },
-      secret,
+      process.env.JWT_SECRET || "default_dev_secret",
       { expiresIn: "1d" }
     );
 
-    console.log("Login success for:", user.email);
+    console.log("✅ Login success for:", user.email);
     res.json({
       token,
       user: { id: user.id, name: user.name, email: user.email, role: user.role }

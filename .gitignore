@@ -26,6 +26,4 @@ dist-ssr
 # .gitignore
 node_modules/
 .env
-dist/
-build/
-.DS_Store
+

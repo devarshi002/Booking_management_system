@@ -9,13 +9,21 @@ const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [error, setError] = useState(null);
 
-  const handleChange = e => setFormData({ ...formData, [e.target.name]: e.target.value });
+  const handleChange = e => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async e => {
     e.preventDefault();
     try {
       await login(formData.email, formData.password);
-      navigate("/");
+
+      const userData = JSON.parse(localStorage.getItem("user"));
+      if (userData?.role === "admin") {
+        navigate("/admin");
+      } else {
+        navigate("/");
+      }
     } catch (err) {
       setError(err.response?.data?.message || "Login failed");
     }
@@ -47,12 +55,18 @@ const Login = () => {
           className="w-full p-3 border rounded mb-6"
         />
 
-        <button type="submit" className="w-full bg-green-600 text-white p-3 rounded font-semibold hover:bg-green-700">
+        <button
+          type="submit"
+          className="w-full bg-green-600 text-white p-3 rounded font-semibold hover:bg-green-700"
+        >
           Login
         </button>
 
         <p className="mt-4 text-center text-sm">
-          Don't have an account? <Link to="/signup" className="text-green-600">Sign up</Link>
+          Don't have an account?{" "}
+          <Link to="/signup" className="text-green-600">
+            Sign up
+          </Link>
         </p>
       </form>
     </div>

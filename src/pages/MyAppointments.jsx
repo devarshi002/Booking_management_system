@@ -1,80 +1,63 @@
-// src/pages/MyAppointments.jsx
 import React, { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 
 const MyAppointments = () => {
   const { authAxios } = useContext(AuthContext);
   const [appointments, setAppointments] = useState([]);
-  const [error, setError] = useState(null);
-
-  const fetchAppointments = async () => {
-    try {
-      const res = await authAxios.get("http://localhost:5000/api/appointments");
-      setAppointments(res.data);
-    } catch (err) {
-      setError("Failed to fetch appointments");
-    }
-  };
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchAppointments();
-  }, []);
+    const fetchAppointments = async () => {
+      try {
+        const res = await authAxios.get("http://localhost:5000/api/appointments");
+        setAppointments(res.data);
+      } catch (err) {
+        console.error("Failed to fetch appointments:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const cancelAppointment = async (id) => {
-    try {
-      await authAxios.delete(`http://localhost:5000/api/appointments/${id}`);
-      fetchAppointments(); // refresh list
-    } catch {
-      alert("Failed to cancel appointment");
-    }
-  };
+    fetchAppointments();
+  }, [authAxios]);
+
+  if (loading) {
+    return <p className="text-center mt-10">Loading appointments...</p>;
+  }
+
+  if (appointments.length === 0) {
+    return <p className="text-center mt-10">You have no appointments.</p>;
+  }
 
   return (
-    <div className="max-w-3xl mx-auto mt-8">
-      <h2 className="text-2xl font-bold mb-4">My Appointments</h2>
-      {error && <p className="text-red-600 mb-2">{error}</p>}
-      {appointments.length === 0 ? (
-        <p>No appointments found.</p>
-      ) : (
-        <ul className="space-y-4">
-          {appointments.map((appt) => (
-            <li
-              key={appt.id}
-              className="border p-4 rounded shadow flex justify-between items-center"
-            >
-              <div>
-                <p>
-                  <strong>Service:</strong> {appt.service}
-                </p>
-                <p>
-                  <strong>Date:</strong> {new Date(appt.date).toLocaleDateString()}
-                </p>
-                <p>
-                  <strong>Time:</strong> {appt.time}
-                </p>
-                <p>
-                  <strong>Status:</strong>{" "}
-                  <span
-                    className={
-                      appt.status === "booked" ? "text-green-600" : "text-red-600"
-                    }
-                  >
-                    {appt.status}
-                  </span>
-                </p>
-              </div>
-              {appt.status === "booked" && (
-                <button
-                  onClick={() => cancelAppointment(appt.id)}
-                  className="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700"
-                >
-                  Cancel
-                </button>
-              )}
-            </li>
-          ))}
-        </ul>
-      )}
+    <div className="min-h-screen bg-gray-50 p-6">
+      <h1 className="text-3xl font-bold mb-6 text-center text-green-700">
+        My Appointments
+      </h1>
+
+      <div className="max-w-3xl mx-auto space-y-4">
+        {appointments.map((appt) => (
+          <div key={appt.id} className="bg-white rounded shadow p-5 border">
+            <h2 className="text-xl font-semibold text-green-700">{appt.service}</h2>
+            <p><strong>Date:</strong> {appt.date}</p>
+            <p><strong>Time:</strong> {appt.time}</p>
+            <p>
+              <strong>Status: </strong>
+              <span
+                className={
+                  appt.status === "accepted"
+                    ? "text-green-600 font-semibold"
+                    : appt.status === "rejected"
+                    ? "text-red-600 font-semibold"
+                    : "text-yellow-600 font-semibold"
+                }
+              >
+                {appt.status.charAt(0).toUpperCase() + appt.status.slice(1)}
+              </span>
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
