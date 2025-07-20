@@ -1,12 +1,80 @@
-# React + Vite
+# 📅 Appointment Booking System
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A full-stack appointment booking platform built with **React**, **Node.js**, **Express**, and **MySQL**, featuring role-based access, email notifications, and an intuitive admin dashboard.
 
-Currently, two official plugins are available:
+![License](https://img.shields.io/badge/license-MIT-blue.svg)
+![React](https://img.shields.io/badge/frontend-React-blue)
+![Node.js](https://img.shields.io/badge/backend-Node.js-green)
+![MySQL](https://img.shields.io/badge/database-MySQL-lightgrey)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 🚀 Live Preview (if deployed)
+Coming soon...
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🔗 GitHub Repository  
+[👉 View the Source Code](https://github.com/yourusername/appointment-booking-app)
+
+---
+
+## 🛠️ Features
+
+- 🔐 **JWT Authentication** (User & Admin roles)
+- 📅 **Book Appointments** by selecting service, date & time
+- 📨 **Email Notification to Admin** on new booking
+- 🧑‍💻 **Admin Dashboard** to:
+  - View all appointments
+  - Accept / Reject / Cancel
+  - Track user and status
+- ✅ **Real-time UI Feedback** using `react-toastify`
+- 🌐 **Responsive Design** using Tailwind CSS
+
+---
+
+## 📸 Screenshots
+
+### 🧍 User Booking Page
+![Booking Page Screenshot](./screenshots/user-booking.png)
+
+### 🧑‍💼 Admin Dashboard
+![Admin Dashboard Screenshot](./screenshots/admin-dashboard.png)
+
+---
+
+## 🧩 Tech Stack
+
+| Layer        | Tech                      |
+| ------------ | ------------------------- |
+| Frontend     | React.js, Tailwind CSS    |
+| Backend      | Node.js, Express.js       |
+| Database     | MySQL                     |
+| Auth         | JWT                       |
+| Email        | Nodemailer (SMTP based)   |
+| Toast Alerts | react-toastify            |
+
+---
+
+## 📦 Installation & Setup
+
+```bash
+# 1. Clone the repository
+git clone https://github.com/yourusername/appointment-booking-app
+cd appointment-booking-app
+
+# 2. Install backend dependencies
+cd server
+npm install
+
+# 3. Set up .env for backend
+cp .env.example .env
+# Add your DB, JWT, SMTP credentials
+
+# 4. Run backend
+npm start
+
+# 5. Install frontend dependencies
+cd ../client
+npm install
+
+# 6. Run frontend
+npm run dev
