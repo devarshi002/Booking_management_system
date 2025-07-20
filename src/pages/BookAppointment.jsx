@@ -1,4 +1,3 @@
-// src/pages/BookAppointment.jsx
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
@@ -36,45 +35,72 @@ const BookAppointment = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 bg-white p-6 rounded shadow">
-      <h2 className="text-2xl mb-4 font-bold">Book Appointment</h2>
-      {error && <p className="text-red-600 mb-2">{error}</p>}
-      {success && <p className="text-green-600 mb-2">{success}</p>}
+    <div className="min-h-screen bg-gray-900 dark:bg-black flex items-center justify-center p-6">
+      <div className="max-w-md w-full bg-white dark:bg-gray-900 p-8 rounded-3xl shadow-lg border border-gray-200 dark:border-gray-700 transition-colors">
+        <h2 className="text-3xl font-extrabold mb-6 text-green-700 dark:text-green-400 text-center">
+          Book Appointment
+        </h2>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="service"
-          placeholder="Service (e.g. Consultation)"
-          value={formData.service}
-          onChange={handleChange}
-          required
-          className="w-full border p-3 rounded"
-        />
-        <input
-          type="date"
-          name="date"
-          value={formData.date}
-          onChange={handleChange}
-          required
-          className="w-full border p-3 rounded"
-        />
-        <input
-          type="time"
-          name="time"
-          value={formData.time}
-          onChange={handleChange}
-          required
-          className="w-full border p-3 rounded"
-        />
+        {error && (
+          <p className="text-red-600 dark:text-red-400 mb-4 text-center font-semibold">
+            {error}
+          </p>
+        )}
+        {success && (
+          <p className="text-green-600 dark:text-green-400 mb-4 text-center font-semibold">
+            {success}
+          </p>
+        )}
 
-        <button
-          type="submit"
-          className="bg-green-600 text-white w-full py-3 rounded hover:bg-green-700"
-        >
-          Book Now
-        </button>
-      </form>
+        <form onSubmit={handleSubmit} className="space-y-6">
+          <input
+            type="text"
+            name="service"
+            placeholder="Service (e.g. Consultation)"
+            value={formData.service}
+            onChange={handleChange}
+            required
+            className="w-full border border-gray-300 dark:border-gray-600 p-3 rounded-xl
+                       bg-gray-50 dark:bg-gray-700
+                       text-gray-900 dark:text-gray-100
+                       focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400
+                       transition"
+          />
+
+          <input
+            type="date"
+            name="date"
+            value={formData.date}
+            onChange={handleChange}
+            required
+            className="w-full border border-gray-300 dark:border-gray-600 p-3 rounded-xl
+                       bg-gray-50 dark:bg-gray-700
+                       text-gray-900 dark:text-gray-100
+                       focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400
+                       transition"
+          />
+
+          <input
+            type="time"
+            name="time"
+            value={formData.time}
+            onChange={handleChange}
+            required
+            className="w-full border border-gray-300 dark:border-gray-600 p-3 rounded-xl
+                       bg-gray-50 dark:bg-gray-700
+                       text-gray-900 dark:text-gray-100
+                       focus:outline-none focus:ring-2 focus:ring-green-500 dark:focus:ring-green-400
+                       transition"
+          />
+
+          <button
+            type="submit"
+            className="bg-green-600 text-white w-full py-3 rounded-xl hover:bg-green-700 transition font-semibold shadow-md"
+          >
+            Book Now
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
