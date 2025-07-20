@@ -34,10 +34,13 @@ Coming soon...
 ## 📸 Screenshots
 
 ### 🧍 User Booking Page
-![Booking Page Screenshot](./screenshots/user-booking.png)
+![Booking Page Screenshot]<img width="1897" height="865" alt="Book_appointment" src="https://github.com/user-attachments/assets/11dd6259-043f-4034-9b5c-58752441841d" />
+
+
 
 ### 🧑‍💼 Admin Dashboard
-![Admin Dashboard Screenshot](./screenshots/admin-dashboard.png)
+![Admin Dashboard Screenshot]<img width="1912" height="868" alt="dashboard" src="https://github.com/user-attachments/assets/a0527f7d-23eb-4764-8b83-0ddd7e23d4a1" />
+
 
 ---
 
